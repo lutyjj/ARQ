@@ -14,11 +14,13 @@ def parity_bit(self):
     return frame_sum % 2
 
 
+probability = 0.05
+
+
 # interference
 def interfere_array(self):
-    chance = random.randint(0, 5)
-    # probability of interference - 20%
-    if chance == 1:
+    # probability of interference
+    if random.random() < probability:
         # don't interfere parity bit
         index = random.randint(0, self.size - 2)
         self[index] = random.randint(0, 255)
@@ -62,6 +64,7 @@ def receive_frame(self, index):
         print("Frame ", index, " is broken, repeating transmission")
         receive_frame(self, index)
 
+    # remove parity bit from received array and return it
     return numpy.delete(self, len(self) - 1)
 
 
