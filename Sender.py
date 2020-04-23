@@ -2,6 +2,7 @@ import numpy as np
 import crcmod as crcmod
 
 class Sender:
+    control_method = 0
     data = []
     shape = None
 
@@ -20,11 +21,15 @@ class Sender:
 
     def crc(self, array):
         crc32_func = crcmod.mkCrcFun(0x104c11db7, initCrc=0, xorOut=0xFFFFFFFF)
+        
+        # generate string of ints without last item (control sum)
         line = ''
         for i in range(0, array.size):
             line+=str(array[i])
-        crcres = hex(crc32_func(bytes(line, encoding='utf-8')))
-        return crcres
+        
+        # generate CRC based on string
+        crc_result = hex(crc32_func(bytes(line, encoding='utf-8')))
+        return crc_result
 
 
     def split_array(self, array):
@@ -37,23 +42,27 @@ class Sender:
             for j in range(len(arr)):
                 # for each array of individual pixels
                 pix_arr = arr[j]
+
+                # generate control sum
                 if (self.control_method == 0):
-                    # generate parity bit
                     bit = self.parity_bit(pix_arr)
                 elif (self.control_method == 1):
                     bit = self.crc(pix_arr)
-                # temporary array to append parity bit
+
+                # create temporary array to append control sum
                 new_pix_arr = np.append(pix_arr, bit)
                 # append array to final array
                 tmp_arr.append(new_pix_arr)
 
+        # make splitted array (frames) sender's data
         self.data = tmp_arr
 
 
     def send_frames(self):
-        # send original shape
+        # send original shape and control method
         self.receiver.shape = self.shape
         self.receiver.control_method = self.control_method
+
         # Stop-and-wait ARQ
         i = 0
         while i < len(self.data):

@@ -9,7 +9,7 @@ print('0. Parity bit (default)')
 print('1. CRC')
 control_method = int(input())
 
-print('Enter interference intensity (float): ')
+print('Enter interference intensity (float, 0 < x < 1): ')
 intensity = float(input())
 
 img = Image.open("test.jpg")
