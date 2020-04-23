@@ -4,15 +4,24 @@ import random
 from Sender import Sender
 from Receiver import Receiver
 
+print('Choose error-detecting method:')
+print('0. Parity bit (default)')
+print('1. CRC')
+control_method = int(input())
+
+print('Enter interference intensity (float): ')
+intensity = float(input())
+
 img = Image.open("test.jpg")
 img.show()
 
-receiver = Receiver()
-sender = Sender(receiver)
+receiver = Receiver(intensity)
+sender = Sender(receiver, control_method)
 
 img_array = np.asarray(img)
-
 sender.split_array(img_array)
+
+print('Starting transmission (Stop-and-Wait):')
 sender.send_frames()
 
 final_img = receiver.finalize_img()
