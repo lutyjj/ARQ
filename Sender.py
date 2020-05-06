@@ -83,12 +83,15 @@ class Sender:
             while i < len(self.data):
                 slide = 0
                 NACK = False
+                # receive ACK from window
                 for j in range(i, window_end):
                     if j == len(self.data):
                         break
 
                     if not ACK[j]:
                         ACK[j] = self.receiver.receive_frame(self.data[j], j)
+
+                        # check if the entire window has been sent correctly
                         if ACK[j] == True and NACK == False:
                             slide += 1
                         else:
@@ -96,6 +99,7 @@ class Sender:
                     else:
                         pass
 
+                # slide window by the window_size if NACK hasn't appear
                 if not NACK:
                     if (window_end + self.window_size) >= len(self.data):
                         window_end = len(self.data)
@@ -103,6 +107,7 @@ class Sender:
                         window_end += self.window_size
                     i += self.window_size
 
+                # otherwise - slide by value of slide counter
                 else:
                     if(window_end + self.window_size) >= len(self.data):
                         window_end = len(self.data)
