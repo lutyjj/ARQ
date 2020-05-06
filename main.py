@@ -4,6 +4,12 @@ import random
 from Sender import Sender
 from Receiver import Receiver
 
+
+print('Choose ARQ protcol:')
+print('0. Stop-and-Wait')
+print('1. Selective-Repeat')
+chosen_algorithm = int(input())
+
 print('Choose error-detecting method:')
 print('0. Parity bit (default)')
 print('1. CRC')
@@ -21,8 +27,8 @@ sender = Sender(receiver, control_method)
 img_array = np.asarray(img)
 sender.split_array(img_array)
 
-print('Starting transmission (Stop-and-Wait):')
-sender.send_frames()
+print('Starting transmission:')
+sender.send_frames(chosen_algorithm)
 
 final_img = receiver.finalize_img()
 final_img.show()
