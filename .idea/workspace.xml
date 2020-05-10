@@ -1,40 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:origin/etap2" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="c57b5551-35ad-4047-b935-acb38abd7938" name="Default Changelist" comment="" />
+    <list default="true" id="e7be3181-59fb-4413-9d1e-6781b754e984" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/aws.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/__main__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/ARQ.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ARQ.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sender.py" beforeDir="false" afterPath="$PROJECT_DIR$/Sender.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="hiddenUrls">
+      <set>
+        <option value="https://github.com/lutyjj/ARQ.git" />
+      </set>
+    </option>
+  </component>
   <component name="ProjectId" id="1bXAexARUmvqjmy1BmJjOUeYKBz" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/main.py" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager">
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python">
+  <component name="RunManager" selected="Python.ARQ">
+    <configuration name="ARQ" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="ARQ" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="C:\python3.8.2\python.exe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="SDK_HOME" value="C:\Users\huawei\AppData\Local\Programs\Python\Python37\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/.." />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -43,13 +92,38 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Unnamed" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="ARQ" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\huawei\AppData\Local\Programs\Python\Python37\python.exe" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.ARQ" />
+      <item itemvalue="Python.Unnamed" />
+    </list>
   </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="c57b5551-35ad-4047-b935-acb38abd7938" name="Default Changelist" comment="" />
+      <changelist id="e7be3181-59fb-4413-9d1e-6781b754e984" name="Default Changelist" comment="" />
       <created>1588768163762</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -57,61 +131,117 @@
     </task>
     <servers />
   </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/etap2" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
   <component name="WindowStateProjectService">
-    <state x="2334" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588768199852">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state x="568" y="141" key="#Python" timestamp="1589016358954">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="568" y="141" key="#Python/0.0.1536.864@0.0.1536.864" timestamp="1589016358954" />
+    <state x="331" y="145" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588952043489">
+      <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="2334" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.680/1920.0.1920.1040@1920.0.1920.1040" timestamp="1588768199852" />
+    <state x="331" y="145" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.864@0.0.1536.864" timestamp="1588952043489" />
     <state x="2660" y="225" key="#com.intellij.ide.macro.MacrosDialog" timestamp="1588768191855">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2660" y="225" key="#com.intellij.ide.macro.MacrosDialog/0.0.1280.680/1920.0.1920.1040@1920.0.1920.1040" timestamp="1588768191855" />
-    <state x="2660" y="275" key="FileChooserDialogImpl" timestamp="1588768195854">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state x="745" y="245" key="EnvironmentVariablesDialog" timestamp="1588951864376">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="745" y="245" key="EnvironmentVariablesDialog/0.0.1536.864@0.0.1536.864" timestamp="1588951864376" />
+    <state x="592" y="228" key="FileChooserDialogImpl" timestamp="1588952037906">
+      <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="2660" y="275" key="FileChooserDialogImpl/0.0.1280.680/1920.0.1920.1040@1920.0.1920.1040" timestamp="1588768195854" />
-    <state width="1899" height="348" key="GridCell.Tab.0.bottom" timestamp="1588769659007">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state x="592" y="228" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1588952037906" />
+    <state width="1515" height="651" key="GridCell.Tab.0.bottom" timestamp="1589019304731">
+      <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state width="1899" height="348" key="GridCell.Tab.0.bottom/0.0.1280.680/1920.0.1920.1040@1920.0.1920.1040" timestamp="1588769659007" />
-    <state width="1899" height="348" key="GridCell.Tab.0.center" timestamp="1588769659007">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state width="1515" height="651" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1589019304731" />
+    <state width="1515" height="651" key="GridCell.Tab.0.center" timestamp="1589019304730">
+      <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state width="1899" height="348" key="GridCell.Tab.0.center/0.0.1280.680/1920.0.1920.1040@1920.0.1920.1040" timestamp="1588769659007" />
-    <state width="1899" height="348" key="GridCell.Tab.0.left" timestamp="1588769659007">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state width="1515" height="651" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1589019304730" />
+    <state width="1515" height="651" key="GridCell.Tab.0.left" timestamp="1589019304730">
+      <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state width="1899" height="348" key="GridCell.Tab.0.left/0.0.1280.680/1920.0.1920.1040@1920.0.1920.1040" timestamp="1588769659007" />
-    <state width="1899" height="348" key="GridCell.Tab.0.right" timestamp="1588769659007">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state width="1515" height="651" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1589019304730" />
+    <state width="1515" height="651" key="GridCell.Tab.0.right" timestamp="1589019304730">
+      <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state width="1899" height="348" key="GridCell.Tab.0.right/0.0.1280.680/1920.0.1920.1040@1920.0.1920.1040" timestamp="1588769659007" />
-    <state width="1899" height="348" key="GridCell.Tab.1.bottom" timestamp="1588769659007">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state width="1515" height="651" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1589019304730" />
+    <state width="1364" height="259" key="GridCell.Tab.1.bottom" timestamp="1588951967387">
+      <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state width="1899" height="348" key="GridCell.Tab.1.bottom/0.0.1280.680/1920.0.1920.1040@1920.0.1920.1040" timestamp="1588769659007" />
-    <state width="1899" height="348" key="GridCell.Tab.1.center" timestamp="1588769659007">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state width="1364" height="259" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1588951967387" />
+    <state width="1364" height="259" key="GridCell.Tab.1.center" timestamp="1588951967387">
+      <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state width="1899" height="348" key="GridCell.Tab.1.center/0.0.1280.680/1920.0.1920.1040@1920.0.1920.1040" timestamp="1588769659007" />
-    <state width="1899" height="348" key="GridCell.Tab.1.left" timestamp="1588769659007">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state width="1364" height="259" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1588951967387" />
+    <state width="1364" height="259" key="GridCell.Tab.1.left" timestamp="1588951967387">
+      <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state width="1899" height="348" key="GridCell.Tab.1.left/0.0.1280.680/1920.0.1920.1040@1920.0.1920.1040" timestamp="1588769659007" />
-    <state width="1899" height="348" key="GridCell.Tab.1.right" timestamp="1588769659007">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state width="1364" height="259" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1588951967387" />
+    <state width="1364" height="259" key="GridCell.Tab.1.right" timestamp="1588951967387">
+      <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state width="1899" height="348" key="GridCell.Tab.1.right/0.0.1280.680/1920.0.1920.1040@1920.0.1920.1040" timestamp="1588769659007" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Sender.py</url>
-          <line>82</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <state width="1364" height="259" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1588951967387" />
+    <state x="316" y="117" key="SettingsEditor" timestamp="1588950931165">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="316" y="117" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1588950931165" />
+    <state x="578" y="346" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1588951346461">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="578" y="346" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.864@0.0.1536.864" timestamp="1588951346461" />
+    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1589016721033">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1589016721033" />
   </component>
 </project>

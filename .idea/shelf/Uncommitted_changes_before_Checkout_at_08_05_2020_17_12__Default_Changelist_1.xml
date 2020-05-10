@@ -1,0 +1,89 @@
+<changelist name="Uncommitted_changes_before_Checkout_at_08_05_2020_17_12_[Default_Changelist]1" date="1588950814004" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_05_2020_17_12_[Default_Changelist]1/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 08.05.2020 17:12 [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="venv/Lib/site-packages/pip/_vendor/distlib/w32.exe" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_05_2020_17_12_[Default_Changelist]1/w32.exe" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="venv/Lib/site-packages/setuptools/cli.exe" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_05_2020_17_12_[Default_Changelist]1/cli.exe" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="venv/Scripts/easy_install-3.7.exe" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_05_2020_17_12_[Default_Changelist]1/easy_install-3.7.exe" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="venv/Scripts/easy_install.exe" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_05_2020_17_12_[Default_Changelist]1/easy_install.exe" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="venv/Scripts/pip3.7.exe" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_05_2020_17_12_[Default_Changelist]1/pip3.7.exe" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="venv/Lib/site-packages/setuptools/gui.exe" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_05_2020_17_12_[Default_Changelist]1/gui.exe" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="venv/Lib/site-packages/setuptools/gui-64.exe" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_05_2020_17_12_[Default_Changelist]1/gui-64.exe" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="venv/Scripts/python.exe" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_05_2020_17_12_[Default_Changelist]1/python.exe" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="venv/Scripts/pythonw.exe" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_05_2020_17_12_[Default_Changelist]1/pythonw.exe" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="venv/Lib/site-packages/setuptools/cli-64.exe" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_05_2020_17_12_[Default_Changelist]1/cli-64.exe" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="venv/Lib/site-packages/pip/_vendor/distlib/t64.exe" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_05_2020_17_12_[Default_Changelist]1/t64.exe" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="venv/Lib/site-packages/setuptools/cli-32.exe" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_05_2020_17_12_[Default_Changelist]1/cli-32.exe" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="venv/Lib/site-packages/pip/_vendor/distlib/t32.exe" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_05_2020_17_12_[Default_Changelist]1/t32.exe" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="venv/Lib/site-packages/pip/_vendor/distlib/w64.exe" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_05_2020_17_12_[Default_Changelist]1/w64.exe" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="venv/Scripts/pip3.exe" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_05_2020_17_12_[Default_Changelist]1/pip3.exe" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="venv/Scripts/pip.exe" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_05_2020_17_12_[Default_Changelist]1/pip.exe" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="venv/Lib/site-packages/setuptools/gui-32.exe" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_05_2020_17_12_[Default_Changelist]1/gui-32.exe" />
+  </binary>
+</changelist>
