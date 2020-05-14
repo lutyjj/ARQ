@@ -1,8 +1,6 @@
-from turtle import delay
-
 import numpy as np
 import crcmod as crcmod
-import time
+
 
 class Sender:
     control_method = 0
@@ -79,7 +77,7 @@ class Sender:
             for i in range(0, len(self.data)):
                 ACK.append(False)
 
-            i =     0
+            i = 0
             window_end = i + self.window_size
 
             while i < len(self.data):
@@ -116,65 +114,6 @@ class Sender:
                     else:
                         window_end += slide
                     i += slide
-#Go&Back
-                if chosen_algorithm == 2:
-                    if chosen_algorithm == 1:
-
-                        # ACK table for their values
-                        ACK = []
-                        for i in range(0, len(self.data)):
-                            ACK.append(False)
-
-        # pokazuje ilość ramek
-        size_of_table = len(self.tableOfFrames)
-
-        # tworzy tablice o rozmiarze ilości ramek z potwierdzeniami lub odrzuceniami pakietów
-        for i in range(0, size_of_table):
-            self.ACK.append(False)
-
-
-
-        # rozpoczęcie przesyłania
-        i = 0
-        win_start = i
-        win_end = i + self.windowSize
-        length_table_of_frames = len(self.tableOfFrames)
-
-        while i < len(self.data):
-            while i < win_end and i < len(self.tableOfFrames):
-                # pobranie ramki do wysłania
-                data = self.tableOfFrames[i]
-                sequence_number = i
-
-                # wysyłanie ramki
-
-                self.ACK[i] = self.receiver.recieve_frame(self.data, sequence_number)
-
-                time.sleep(delay)
-
-                if self.ACK[win_start]:
-                    win_end += 1
-                    win_start += 1
-                    # i = win_start
-                else:
-                    if win_end > len(self.tableOfFrames):
-                        win_end = len(self.tableOfFrames)
-                    for k in range(win_start + 1, win_end):
-                        if self.ACK[k]:
-                            i = win_start - 1
-                            break
-
-                i += 1
-                time.sleep(delay)
-                pass
-            pass
-            time.sleep(delay)
-            if i == win_end:
-                i = win_start
-            pass
-        pass
-
-
 
 
 
