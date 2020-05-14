@@ -1,10 +1,12 @@
+import time
+
 import numpy as np
 import crcmod as crcmod
 
 
 class Sender:
     control_method = 0
-    window_size = 4
+    window_size: int = 4
     data = []
     shape = None
 
@@ -77,6 +79,7 @@ class Sender:
             for i in range(0, len(self.data)):
                 ACK.append(False)
 
+
             i = 0
             window_end = i + self.window_size
 
@@ -112,8 +115,58 @@ class Sender:
                     if(window_end + self.window_size) >= len(self.data):
                         window_end = len(self.data)
                     else:
+
                         window_end += slide
                     i += slide
+
+  #Go-Back
+
+        if chosen_algorithm == 2:
+
+            ACK = []
+            for i in range(0, len(self.data)):
+                ACK.append(False)
+
+
+            i = 0
+            window_start = i
+            window_end = i + self.window_size
+            while i < len(self.data):
+                while i < window_end and i < len(self.data):
+                        ACK[i] = self.receiver.receive_frame(self.data[i], i)
+
+                        if ACK[window_start]:
+                            window_end += 1
+                            window_start += 1
+                        else:
+                            if window_end > len(self.data):
+                                window_end = len(self.data)
+                                for k in range(window_start+1, window_end):
+                                    if ACK[k]:
+                                        i = window_start-1
+                                    break
+
+                        i += 1
+
+                        pass
+                pass
+
+                if i == window_end:
+                    i = window_start
+                pass
+            pass
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

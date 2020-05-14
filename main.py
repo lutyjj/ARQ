@@ -8,6 +8,7 @@ from Receiver import Receiver
 print('Choose ARQ protcol:')
 print('0. Stop-and-Wait')
 print('1. Selective-Repeat')
+print('2. Go-Back')
 chosen_algorithm = int(input())
 
 print('Choose error-detecting method:')
