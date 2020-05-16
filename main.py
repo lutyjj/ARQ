@@ -32,5 +32,6 @@ sender.split_array(img_array)
 print('Starting transmission:')
 sender.send_frames(chosen_algorithm)
 
+receiver.printStatistics()
 final_img = receiver.finalize_img()
 final_img.show()
