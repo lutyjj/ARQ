@@ -1,6 +1,5 @@
 from PIL import Image
 import numpy as np
-import random
 from Sender import Sender
 from Receiver import Receiver
 
@@ -27,11 +26,11 @@ receiver = Receiver(intensity)
 sender = Sender(receiver, control_method)
 
 img_array = np.asarray(img)
-sender.split_array(img_array)
+sender.data_to_binary(img_array)
+sender.split_array()
 
 print('Starting transmission:')
 sender.send_frames(chosen_algorithm)
-
 receiver.printStatistics()
 final_img = receiver.finalize_img()
 final_img.show()

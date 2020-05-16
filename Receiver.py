@@ -3,6 +3,7 @@ import numpy as np
 from PIL import Image
 import crcmod
 import hashlib
+from TransmissionChannel import TransmissionChannel
 
 
 class Receiver:
@@ -10,26 +11,20 @@ class Receiver:
     intensity = 0.5
     broken_frames = []
     result = []
+    result2 = []
     frame = []
     shape = None
     numberOfRejectedPackets = 0
     numberOfAcceptedPackets = 0
     numberOfSentPackets = 0
+    ts = TransmissionChannel(intensity)
 
     def __init__(self, intensity):
         self.intensity = intensity
 
-    # interference
-    def interfere_frame(self, frame):
-        # intensity of interference
-        if random.random() < self.intensity:
-            index = random.randint(0, frame.size - 1)
-            frame[index] = random.randint(0, 255)
-        return frame
-
     def parity_bit(self, frame):
         frame_sum = 0
-        for i in range(0, frame.size - 1):
+        for i in range(0, len(frame) - 1):
             frame_sum += frame[i]
         return frame_sum % 2
 
@@ -38,7 +33,7 @@ class Receiver:
 
         # generate string of ints without last item (control sum)
         line = ''
-        for i in range(0, array.size - 1):
+        for i in range(0, len(array) - 1):
             line += str(array[i])
 
         # generate CRC based on string
@@ -48,7 +43,7 @@ class Receiver:
     def MD5(self, array):
         # generate string of ints without last item (control sum)
         line = ''
-        for i in range(0, array.size - 1):
+        for i in range(0, len(array) - 1):
             line += str(array[i])
         textUtf8 = line.encode("utf-8")
         hash = hashlib.md5(textUtf8)
@@ -60,7 +55,8 @@ class Receiver:
     def receive_frame(self, frame, index):
         # copy received frame to avoid damaging original frame
         self.frame = frame.copy()
-        self.frame = self.interfere_frame(self.frame)
+        # self.frame = self.interfere_frame(self.frame)
+        self.frame = self.ts.interfere_frame(self.frame)
 
         # generate control sum
         if (self.control_method == 0):
@@ -70,7 +66,7 @@ class Receiver:
         elif (self.control_method == 2):
             control_sum = self.MD5(self.frame)
 
-        self.numberOfSentPackets +=1
+        self.numberOfSentPackets += 1
         # check for control sum to be the same
         # with one stored in frame as last item
         if control_sum == self.frame[len(self.frame) - 1]:
@@ -87,6 +83,8 @@ class Receiver:
             # store index of broken frame
             self.broken_frames.append(index)
             return False
+
+
     def printStatistics(self):
         print('Number of sent packets: ', self.numberOfSentPackets)
         print('Number of accepted packets: ', self.numberOfAcceptedPackets)
@@ -94,5 +92,6 @@ class Receiver:
 
     def finalize_img(self):
         # reshape final array to its original shape
+        self.result = np.packbits(np.array(self.result, dtype=int))
         final_img = np.reshape(self.result, self.shape).astype(np.uint8)
         return Image.fromarray(final_img)

@@ -2,19 +2,28 @@ import numpy as np
 import crcmod as crcmod
 import hashlib
 
+
 class Sender:
     control_method = 0
     window_size: int = 4
-    data = []
+    counter = 0
+    bitList = []
+    packets = []
     shape = None
 
     def __init__(self, receiver, control_method):
         self.receiver = receiver
         self.control_method = control_method
 
+    def data_to_binary(self, array):
+        # store shape of original array
+        self.shape = array.shape
+        # create binary list from numpy array
+        self.bitList = np.unpackbits(array)
+
     def parity_bit(self, array):
         frame_sum = 0
-        for i in range(0, array.size):
+        for i in range(0, len(array)):
             frame_sum += array[i]
         return frame_sum % 2
 
@@ -23,7 +32,7 @@ class Sender:
 
         # generate string of ints without last item (control sum)
         line = ''
-        for i in range(0, array.size):
+        for i in range(0, len(array)):
             line += str(array[i])
 
         # generate CRC based on string
@@ -33,7 +42,7 @@ class Sender:
     def MD5(self, array):
         # generate string of ints without last item (control sum)
         line = ''
-        for i in range(0, array.size):
+        for i in range(0, len(array)):
             line += str(array[i])
         textUtf8 = line.encode("utf-8")
         hash = hashlib.md5(textUtf8)
@@ -41,32 +50,36 @@ class Sender:
 
         return hexa
 
-    def split_array(self, array):
-        # store shape of original array
-        self.shape = array.shape
-        # temporary array to store splitted parts
-        tmp_arr = []
-        for i in range(len(array)):
-            arr = array[i]
-            for j in range(len(arr)):
-                # for each array of individual pixels
-                pix_arr = arr[j]
+    def split_array(self):
 
-                # generate control sum
-                if (self.control_method == 0):
-                    bit = self.parity_bit(pix_arr)
-                elif (self.control_method == 1):
-                    bit = self.crc(pix_arr)
-                elif (self.control_method == 2):
-                    bit = self.MD5(pix_arr)
+        packet = []
+        counter = 0
 
-                # create temporary array to append control sum
-                new_pix_arr = np.append(pix_arr, bit)
-                # append array to final array
-                tmp_arr.append(new_pix_arr)
+        for bit in self.bitList:
+            packet.append(bit)
 
-        # make splitted array (frames) sender's data
-        self.data = tmp_arr
+            counter += 1
+            if (counter == 8):
+                # store eight-bit packets
+                self.packets.append(packet)
+                packet = []
+                counter = 0
+
+        # generate control sum for each packet
+        if self.control_method == 0:
+            for packet in self.packets:
+                bit = self.parity_bit(packet)
+                packet.append(bit)
+        elif self.control_method == 1:
+            for packet in self.packets:
+                bit = self.crc(packet)
+                packet.append(bit)
+        elif self.control_method == 2:
+            for packet in self.packets:
+                bit = self.MD5(packet)
+                packet.append(bit)
+
+
 
     def send_frames(self, chosen_algorithm):
         # send original shape and control method
@@ -76,9 +89,9 @@ class Sender:
         # Stop-and-wait ARQ
         if chosen_algorithm == 0:
             i = 0
-            while i < len(self.data):
+            while i < len(self.packets):
                 # Receive ACK
-                ACK = self.receiver.receive_frame(self.data[i], i)
+                ACK = self.receiver.receive_frame(self.packets[i], i)
                 # if ACK is good - proceed to next frame
                 # otherwise - repeat transmission
                 if ACK:
@@ -87,23 +100,22 @@ class Sender:
         # Selective-Repeat
         if chosen_algorithm == 1:
             ACK = []
-            for i in range(0, len(self.data)):
+            for i in range(0, len(self.packets)):
                 ACK.append(False)
-
 
             i = 0
             window_end = i + self.window_size
 
-            while i < len(self.data):
+            while i < len(self.packets):
                 slide = 0
                 NACK = False
                 # receive ACK from window
                 for j in range(i, window_end):
-                    if j == len(self.data):
+                    if j == len(self.packets):
                         break
 
                     if not ACK[j]:
-                        ACK[j] = self.receiver.receive_frame(self.data[j], j)
+                        ACK[j] = self.receiver.receive_frame(self.packets[j], j)
 
                         # check if the entire window has been sent correctly
                         if ACK[j] == True and NACK == False:
@@ -115,75 +127,53 @@ class Sender:
 
                 # slide window by the window_size if NACK hasn't appear
                 if not NACK:
-                    if (window_end + self.window_size) >= len(self.data):
-                        window_end = len(self.data)
+                    if (window_end + self.window_size) >= len(self.packets):
+                        window_end = len(self.packets)
                     else:
                         window_end += self.window_size
                     i += self.window_size
 
                 # otherwise - slide by value of slide counter
                 else:
-                    if(window_end + self.window_size) >= len(self.data):
-                        window_end = len(self.data)
+                    if (window_end + self.window_size) >= len(self.packets):
+                        window_end = len(self.packets)
                     else:
 
                         window_end += slide
                     i += slide
 
-        #Go-Back
+        # Go-Back
 
         if chosen_algorithm == 2:
 
             ACK = []
-            for i in range(0, len(self.data)):
+            for i in range(0, len(self.packets)):
                 ACK.append(False)
-
 
             i = 0
             window_start = i
             window_end = i + self.window_size
-            while i < len(self.data):
-                while i < window_end and i < len(self.data):
-                        ACK[i] = self.receiver.receive_frame(self.data[i], i)
+            while i < len(self.packets):
+                while i < window_end and i < len(self.packets):
+                    ACK[i] = self.receiver.receive_frame(self.packets[i], i)
 
-                        if ACK[window_start]:
-                            window_end += 1
-                            window_start += 1
-                        else:
-                            if window_end > len(self.data):
-                                window_end = len(self.data)
-                                for k in range(window_start+1, window_end):
-                                    if ACK[k]:
-                                        i = window_start-1
-                                    break
+                    if ACK[window_start]:
+                        window_end += 1
+                        window_start += 1
+                    else:
+                        if window_end > len(self.packets):
+                            window_end = len(self.packets)
+                            for k in range(window_start + 1, window_end):
+                                if ACK[k]:
+                                    i = window_start - 1
+                                break
 
-                        i += 1
+                    i += 1
 
-                        pass
+                    pass
                 pass
 
                 if i == window_end:
                     i = window_start
                 pass
             pass
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
