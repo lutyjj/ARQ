@@ -14,6 +14,7 @@ chosen_algorithm = int(input())
 print('Choose error-detecting method:')
 print('0. Parity bit (default)')
 print('1. CRC')
+print('2. MD-5')
 control_method = int(input())
 
 print('Enter interference intensity (float, 0 < x < 1): ')

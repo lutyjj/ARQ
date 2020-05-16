@@ -1,8 +1,6 @@
-import time
-
 import numpy as np
 import crcmod as crcmod
-
+import hashlib
 
 class Sender:
     control_method = 0
@@ -32,6 +30,17 @@ class Sender:
         crc_result = hex(crc32_func(bytes(line, encoding='utf-8')))
         return crc_result
 
+    def MD5(self, array):
+        # generate string of ints without last item (control sum)
+        line = ''
+        for i in range(0, array.size):
+            line += str(array[i])
+        textUtf8 = line.encode("utf-8")
+        hash = hashlib.md5(textUtf8)
+        hexa = hash.hexdigest()
+
+        return hexa
+
     def split_array(self, array):
         # store shape of original array
         self.shape = array.shape
@@ -48,6 +57,8 @@ class Sender:
                     bit = self.parity_bit(pix_arr)
                 elif (self.control_method == 1):
                     bit = self.crc(pix_arr)
+                elif (self.control_method == 2):
+                    bit = self.MD5(pix_arr)
 
                 # create temporary array to append control sum
                 new_pix_arr = np.append(pix_arr, bit)
@@ -119,7 +130,7 @@ class Sender:
                         window_end += slide
                     i += slide
 
-  #Go-Back
+        #Go-Back
 
         if chosen_algorithm == 2:
 

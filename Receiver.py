@@ -2,6 +2,7 @@ import random
 import numpy as np
 from PIL import Image
 import crcmod
+import hashlib
 
 
 class Receiver:
@@ -41,6 +42,17 @@ class Receiver:
         crc_result = hex(crc32_func(bytes(line, encoding='utf-8')))
         return crc_result
 
+    def MD5(self, array):
+        # generate string of ints without last item (control sum)
+        line = ''
+        for i in range(0, array.size - 1):
+            line += str(array[i])
+        textUtf8 = line.encode("utf-8")
+        hash = hashlib.md5(textUtf8)
+        hexa = hash.hexdigest()
+
+        return hexa
+
     # sending
     def receive_frame(self, frame, index):
         # copy received frame to avoid damaging original frame
@@ -52,6 +64,8 @@ class Receiver:
             control_sum = self.parity_bit(self.frame)
         elif (self.control_method == 1):
             control_sum = self.crc(self.frame)
+        elif (self.control_method == 2):
+            control_sum = self.MD5(self.frame)
 
         # check for control sum to be the same
         # with one stored in frame as last item
