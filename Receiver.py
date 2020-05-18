@@ -61,7 +61,7 @@ class Receiver:
         # copy received frame to avoid damaging original frame
         self.frame = frame.copy()
         # self.frame = self.interfere_frame(self.frame)
-        self.frame = self.ts.interfere_frame(self.frame)
+        self.frame = self.ts.bsc(self.frame)
 
         # generate control sum
         if (self.control_method == 0):
