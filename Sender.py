@@ -155,7 +155,7 @@ class Sender:
             window_end = i + self.window_size
             while i < len(self.packets):
                 while i < window_end and i < len(self.packets):
-                    ACK[i] = self.receiver.receive_frame(self.packets[i], i)
+                    ACK[i] = self.receiver.receive_frame_GnB(self.packets[i], i)
 
                     if ACK[window_start]:
                         window_end += 1

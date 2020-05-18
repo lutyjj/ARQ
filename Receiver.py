@@ -18,6 +18,9 @@ class Receiver:
     numberOfAcceptedPackets = 0
     numberOfSentPackets = 0
     ts = TransmissionChannel(intensity)
+    CHECK = []
+    for i in range(0, 768):
+        CHECK.append(False)
 
     def __init__(self, intensity):
         self.intensity = intensity
@@ -95,3 +98,41 @@ class Receiver:
         self.result = np.packbits(np.array(self.result, dtype=int))
         final_img = np.reshape(self.result, self.shape).astype(np.uint8)
         return Image.fromarray(final_img)
+
+    def receive_frame_GnB(self, frame, index):
+        # table for values well sent
+        # copy received frame to avoid damaging original frame
+        self.frame = frame.copy()
+        # self.frame = self.interfere_frame(self.frame)
+        self.frame = self.ts.interfere_frame(self.frame)
+
+        # generate control sum
+        if (self.control_method == 0):
+            control_sum = self.parity_bit(self.frame)
+        elif (self.control_method == 1):
+            control_sum = self.crc(self.frame)
+        elif (self.control_method == 2):
+            control_sum = self.MD5(self.frame)
+
+        self.numberOfSentPackets += 1
+        # check for control sum to be the same
+        # with one stored in frame as last item
+        if control_sum == self.frame[len(self.frame) - 1]:
+            print("Frame ", index, " is good, continuing")
+            # delete last item of frame if control sums match
+            received_frame = np.delete(self.frame, len(self.frame) - 1)
+            if not self.CHECK[index]:
+                # accept received frame
+                self.result.insert(index, received_frame)
+                self.numberOfAcceptedPackets += 1
+                self.CHECK[index] = True
+            else:
+                pass
+
+            return True
+        else:
+            print("Frame ", index, " is broken, repeating transmission")
+            self.numberOfRejectedPackets += 1
+            # store index of broken frame
+            self.broken_frames.append(index)
+            return False
