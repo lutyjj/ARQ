@@ -20,6 +20,8 @@ class TransmissionChannel:
 
 
 
+
+
    # def Gilbert
 
   #  def BER             #BIT ERROR RATE
