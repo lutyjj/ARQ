@@ -1,7 +1,7 @@
 import numpy as np
 import crcmod as crcmod
 import hashlib
-from PIL import Image
+
 
 class Sender:
     control_method = 0
@@ -46,14 +46,13 @@ class Sender:
         line = ''
         for i in range(0, len(array)):
             line += str(array[i])
-        textUtf8 = line.encode("utf-8")
-        hash = hashlib.md5(textUtf8)
-        hexa = hash.hexdigest()
+        text_utf8 = line.encode("utf-8")
+        hash_result = hashlib.md5(text_utf8)
+        hex_result = hash_result.hexdigest()
 
-        return hexa
+        return hex_result
 
     def split_array(self):
-
         packet = []
         counter = 0
 
@@ -61,7 +60,7 @@ class Sender:
             packet.append(bit)
 
             counter += 1
-            if (counter == self.packet_size):
+            if counter == self.packet_size:
                 # store eight-bit packets
                 self.packets.append(packet)
                 packet = []
@@ -80,8 +79,6 @@ class Sender:
             for packet in self.packets:
                 bit = self.MD5(packet)
                 packet.append(bit)
-
-
 
     def send_frames(self, chosen_algorithm):
         # send original shape and control method

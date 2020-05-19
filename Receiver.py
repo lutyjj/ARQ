@@ -1,4 +1,3 @@
-import random
 import numpy as np
 from PIL import Image
 import crcmod
@@ -62,11 +61,11 @@ class Receiver:
         # self.frame = self.interfere_frame(self.frame)
         self.frame = self.ts.bsc(self.frame)
         # generate control sum
-        if (self.control_method == 0):
+        if self.control_method == 0:
             control_sum = self.parity_bit(self.frame)
-        elif (self.control_method == 1):
+        elif self.control_method == 1:
             control_sum = self.crc(self.frame)
-        elif (self.control_method == 2):
+        elif self.control_method == 2:
             control_sum = self.MD5(self.frame)
 
         self.numberOfSentPackets += 1
