@@ -18,10 +18,10 @@ class TransmissionChannel:
 
     def bsc_bit(self, bit, prop):
         if self.draw(prop):
-            if bit == '0':
-                bit = '1'
+            if bit == 0:
+                bit = 1
             else:
-                bit = '0'
+                bit = 0
         return bit
 
     def bsc(self, frame):
