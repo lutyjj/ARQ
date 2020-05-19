@@ -5,24 +5,18 @@ import crcmod
 import hashlib
 from TransmissionChannel import TransmissionChannel
 
+
 class Receiver:
     control_method = 0
     intensity = 0.5
     broken_frames = []
     result = []
-    result2 = []
     frame = []
     shape = None
     numberOfRejectedPackets = 0
     numberOfAcceptedPackets = 0
     numberOfSentPackets = 0
     ts = TransmissionChannel(intensity)
-
-    # 768 = 3* getHeight * getWidth
-    for i in range(0, 768):
-        result.append(0)
-
-
 
     def __init__(self, intensity):
         self.intensity = intensity
@@ -56,13 +50,17 @@ class Receiver:
 
         return hexa
 
+    def count_bits(self):
+        bits = self.shape[0] * self.shape[1] * self.shape[2]
+        for i in range(0, bits):
+            self.result.append(0)
+
     # sending
     def receive_frame(self, frame, index):
         # copy received frame to avoid damaging original frame
         self.frame = frame.copy()
         # self.frame = self.interfere_frame(self.frame)
         self.frame = self.ts.bsc(self.frame)
-
         # generate control sum
         if (self.control_method == 0):
             control_sum = self.parity_bit(self.frame)
@@ -89,7 +87,6 @@ class Receiver:
             self.broken_frames.append(index)
             return False
 
-
     def printStatistics(self):
         print('Number of sent packets: ', self.numberOfSentPackets)
         print('Number of accepted packets: ', self.numberOfAcceptedPackets)
@@ -100,4 +97,3 @@ class Receiver:
         self.result = np.packbits(np.array(self.result, dtype=int))
         final_img = np.reshape(self.result, self.shape).astype(np.uint8)
         return Image.fromarray(final_img)
-

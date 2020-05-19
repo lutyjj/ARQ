@@ -11,9 +11,11 @@ class Sender:
     packets = []
     shape = None
 
-    def __init__(self, receiver, control_method):
+    def __init__(self, receiver, control_method, window_size, packet_size):
         self.receiver = receiver
         self.control_method = control_method
+        self.window_size = window_size
+        self.packet_size = packet_size
 
     def data_to_binary(self, array):
         # store shape of original array
@@ -59,7 +61,7 @@ class Sender:
             packet.append(bit)
 
             counter += 1
-            if (counter == 8):
+            if (counter == self.packet_size):
                 # store eight-bit packets
                 self.packets.append(packet)
                 packet = []
@@ -84,6 +86,7 @@ class Sender:
     def send_frames(self, chosen_algorithm):
         # send original shape and control method
         self.receiver.shape = self.shape
+        self.receiver.count_bits()
         self.receiver.control_method = self.control_method
 
         # Stop-and-wait ARQ
