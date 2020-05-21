@@ -15,10 +15,9 @@ class Receiver:
     numberOfRejectedPackets = 0
     numberOfAcceptedPackets = 0
     numberOfSentPackets = 0
-    ts = TransmissionChannel(intensity)
 
-    def __init__(self, intensity):
-        self.intensity = intensity
+    def __init__(self):
+        pass
 
     def parity_bit(self, frame):
         frame_sum = 0
@@ -59,7 +58,8 @@ class Receiver:
         # copy received frame to avoid damaging original frame
         self.frame = frame.copy()
         # self.frame = self.interfere_frame(self.frame)
-        self.frame = self.ts.bsc(self.frame)
+        #self.frame = self.ts.bsc(self.frame)
+
         # generate control sum
         if self.control_method == 0:
             control_sum = self.parity_bit(self.frame)
@@ -86,7 +86,7 @@ class Receiver:
             self.broken_frames.append(index)
             return False
 
-    def printStatistics(self):
+    def print_statistics(self):
         print('Number of sent packets: ', self.numberOfSentPackets)
         print('Number of accepted packets: ', self.numberOfAcceptedPackets)
         print('Number of rejected packets: ', self.numberOfRejectedPackets)

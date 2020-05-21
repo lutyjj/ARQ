@@ -2,6 +2,8 @@ import numpy as np
 import crcmod as crcmod
 import hashlib
 
+from TransmissionChannel import TransmissionChannel
+
 
 class Sender:
     control_method = 0
@@ -10,12 +12,16 @@ class Sender:
     bitList = []
     packets = []
     shape = None
+    ts: TransmissionChannel
 
     def __init__(self, receiver, control_method, window_size, packet_size):
-        self.receiver = receiver
         self.control_method = control_method
         self.window_size = window_size
         self.packet_size = packet_size
+        self.ts = TransmissionChannel(receiver)
+
+    def set_ts_interference(self, probability):
+        self.ts.probability = probability
 
     def data_to_binary(self, array):
         # store shape of original array
@@ -82,16 +88,14 @@ class Sender:
 
     def send_frames(self, chosen_algorithm):
         # send original shape and control method
-        self.receiver.shape = self.shape
-        self.receiver.count_bits()
-        self.receiver.control_method = self.control_method
+        self.ts.init_connection(self.shape, self.control_method)
 
         # Stop-and-wait ARQ
         if chosen_algorithm == 0:
             i = 0
             while i < len(self.packets):
                 # Receive ACK
-                ACK = self.receiver.receive_frame(self.packets[i], i)
+                ACK = self.ts.pass_frame(self.packets[i], i)
                 # if ACK is good - proceed to next frame
                 # otherwise - repeat transmission
                 if ACK:
@@ -115,7 +119,7 @@ class Sender:
                         break
 
                     if not ACK[j]:
-                        ACK[j] = self.receiver.receive_frame(self.packets[j], j)
+                        ACK[j] = self.ts.pass_frame(self.packets[j], j)
 
                         # check if the entire window has been sent correctly
                         if ACK[j] == True and NACK == False:
@@ -154,7 +158,7 @@ class Sender:
             window_end = i + self.window_size
             while i < len(self.packets):
                 while i < window_end and i < len(self.packets):
-                    ACK[i] = self.receiver.receive_frame(self.packets[i], i)
+                    ACK[i] = self.ts.pass_frame(self.packets[i], i)
 
                     if ACK[window_start]:
                         window_end += 1

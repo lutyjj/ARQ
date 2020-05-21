@@ -2,22 +2,22 @@ import random
 
 
 class TransmissionChannel:
-    frame = []
-    prop = 0.2
+    probability = 0.1
 
-    def __init__(self, intensity):
-        self.intensity = intensity
+    def __init__(self, receiver):
+        self.receiver = receiver
 
-    # interference
-    def interfere_frame(self, frame):
-        # intensity of interference
-        if random.random() < self.intensity:
-            index = random.randint(0, len(frame) - 1)
-            frame[index] = random.randint(0, 1)
-        return frame
+    def init_connection(self, shape, control_method):
+        self.receiver.shape = shape
+        self.receiver.count_bits()
+        self.receiver.control_method = control_method
 
-    def bsc_bit(self, bit, prop):
-        if self.draw(prop):
+    def pass_frame(self, frame, index):
+        frame = self.bsc(frame)
+        return self.receiver.receive_frame(frame, index)
+
+    def bsc_bit(self, bit, probability):
+        if self.draw(probability):
             if bit == 0:
                 bit = 1
             else:
@@ -27,7 +27,7 @@ class TransmissionChannel:
     def bsc(self, frame):
         noised = []
         for bit in frame:
-            noised.append(self.bsc_bit(bit, self.prop))
+            noised.append(self.bsc_bit(bit, self.probability))
         return noised
 
     def draw(self, probability):
