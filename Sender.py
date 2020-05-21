@@ -42,7 +42,7 @@ class Sender:
     control_method = 0
     window_size: int = 4
     counter = 0
-    bitList = []
+    bit_list = []
     packets = []
     shape = None
 
@@ -59,42 +59,13 @@ class Sender:
         # store shape of original array
         self.shape = array.shape
         # create binary list from numpy array
-        self.bitList = np.unpackbits(array)
-
-    def parity_bit(self, array):
-        frame_sum = 0
-        for i in range(0, len(array)):
-            frame_sum += array[i]
-        return frame_sum % 2
-
-    def crc(self, array):
-        crc32_func = crcmod.mkCrcFun(0x104c11db7, initCrc=0, xorOut=0xFFFFFFFF)
-
-        # generate string of ints without last item (control sum)
-        line = ''
-        for i in range(0, len(array)):
-            line += str(array[i])
-
-        # generate CRC based on string
-        crc_result = hex(crc32_func(bytes(line, encoding='utf-8')))
-        return crc_result
-
-    def MD5(self, array):
-        # generate string of ints without last item (control sum)
-        line = ''
-        for i in range(0, len(array)):
-            line += str(array[i])
-        text_utf8 = line.encode("utf-8")
-        hash_result = hashlib.md5(text_utf8)
-        hex_result = hash_result.hexdigest()
-
-        return hex_result
+        self.bit_list = np.unpackbits(array)
 
     def split_array(self):
         packet = []
         counter = 0
 
-        for bit in self.bitList:
+        for bit in self.bit_list:
             packet.append(bit)
 
             counter += 1
@@ -127,42 +98,42 @@ class Sender:
             i = 0
             while i < len(self.packets):
                 # Receive ACK
-                ACK = self.ts.pass_frame(self.packets[i], i)
+                ack = self.ts.pass_frame(self.packets[i], i)
                 # if ACK is good - proceed to next frame
                 # otherwise - repeat transmission
-                if ACK:
+                if ack:
                     i += 1
 
         # Selective-Repeat
         if chosen_algorithm == 1:
-            ACK = []
+            ack = []
             for i in range(0, len(self.packets)):
-                ACK.append(False)
+                ack.append(False)
 
             i = 0
             window_end = i + self.window_size
 
             while i < len(self.packets):
                 slide = 0
-                NACK = False
+                nack = False
                 # receive ACK from window
                 for j in range(i, window_end):
                     if j == len(self.packets):
                         break
 
-                    if not ACK[j]:
-                        ACK[j] = self.ts.pass_frame(self.packets[j], j)
+                    if not ack[j]:
+                        ack[j] = self.ts.pass_frame(self.packets[j], j)
 
                         # check if the entire window has been sent correctly
-                        if ACK[j] == True and NACK == False:
+                        if ack[j] and not nack:
                             slide += 1
                         else:
-                            NACK = True
+                            nack = True
                     else:
                         pass
 
                 # slide window by the window_size if NACK hasn't appear
-                if not NACK:
+                if not nack:
                     if (window_end + self.window_size) >= len(self.packets):
                         window_end = len(self.packets)
                     else:
@@ -178,28 +149,27 @@ class Sender:
                         window_end += slide
                     i += slide
 
-        # Go-Back
-
+        # Go-Back-N
         if chosen_algorithm == 2:
-            ACK = []
+            ack = []
             for i in range(0, len(self.packets)):
-                ACK.append(False)
+                ack.append(False)
 
             i = 0
             window_start = i
             window_end = i + self.window_size
             while i < len(self.packets):
                 while i < window_end and i < len(self.packets):
-                    ACK[i] = self.ts.pass_frame(self.packets[i], i)
+                    ack[i] = self.ts.pass_frame(self.packets[i], i)
 
-                    if ACK[window_start]:
+                    if ack[window_start]:
                         window_end += 1
                         window_start += 1
                     else:
                         if window_end > len(self.packets):
                             window_end = len(self.packets)
                             for k in range(window_start + 1, window_end):
-                                if ACK[k]:
+                                if ack[k]:
                                     i = window_start - 1
                                 break
 

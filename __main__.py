@@ -1,5 +1,5 @@
-from PIL import Image
 import numpy as np
+from PIL import Image
 from Sender import Sender
 from Receiver import Receiver
 
@@ -25,6 +25,7 @@ packet_size = int(input())
 img = Image.open("test.jpg")
 scaled_img = img.resize((640, 640))
 scaled_img.show()
+
 receiver = Receiver()
 sender = Sender(receiver, control_method, windows_size, packet_size)
 sender.set_ts_interference(probability)
@@ -36,6 +37,7 @@ sender.split_array()
 print('Starting transmission:')
 sender.send_frames(chosen_algorithm)
 receiver.print_statistics()
+
 final_img = receiver.finalize_img()
 scaled_final_img = final_img.resize((640, 640))
 scaled_final_img.show()

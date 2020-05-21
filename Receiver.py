@@ -16,37 +16,8 @@ class Receiver:
     def __init__(self):
         pass
 
-    def parity_bit(self, frame):
-        frame_sum = 0
-        for i in range(0, len(frame) - 1):
-            frame_sum += frame[i]
-        return frame_sum % 2
-
-    def crc(self, array):
-        crc32_func = crcmod.mkCrcFun(0x104c11db7, initCrc=0, xorOut=0xFFFFFFFF)
-
-        # generate string of ints without last item (control sum)
-        line = ''
-        for i in range(0, len(array) - 1):
-            line += str(array[i])
-
-        # generate CRC based on string
-        crc_result = hex(crc32_func(bytes(line, encoding='utf-8')))
-        return crc_result
-
-    def MD5(self, array):
-        # generate string of ints without last item (control sum)
-        line = ''
-        for i in range(0, len(array) - 1):
-            line += str(array[i])
-        textUtf8 = line.encode("utf-8")
-        hash = hashlib.md5(textUtf8)
-        hexa = hash.hexdigest()
-
-        return hexa
-
-    def prepare(self, packets_size):
-        for i in range(0, packets_size):
+    def init_result_list(self, packets_count):
+        for i in range(0, packets_count):
             self.result.append(0)
 
     # sending

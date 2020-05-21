@@ -7,9 +7,9 @@ class TransmissionChannel:
     def __init__(self, receiver):
         self.receiver = receiver
 
-    def init_connection(self, shape, control_method, packets_size):
+    def init_connection(self, shape, control_method, packets_count):
         self.receiver.shape = shape
-        self.receiver.prepare(packets_size)
+        self.receiver.init_result_list(packets_count)
         self.receiver.control_method = control_method
 
     def pass_frame(self, frame, index):
