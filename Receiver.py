@@ -7,7 +7,6 @@ from TransmissionChannel import TransmissionChannel
 
 class Receiver:
     control_method = 0
-    intensity = 0.5
     broken_frames = []
     result = []
     frame = []
@@ -48,17 +47,14 @@ class Receiver:
 
         return hexa
 
-    def count_bits(self):
-        bits = self.shape[0] * self.shape[1] * self.shape[2]
-        for i in range(0, bits):
+    def prepare(self, packets_size):
+        for i in range(0, packets_size):
             self.result.append(0)
 
     # sending
     def receive_frame(self, frame, index):
         # copy received frame to avoid damaging original frame
         self.frame = frame.copy()
-        # self.frame = self.interfere_frame(self.frame)
-        #self.frame = self.ts.bsc(self.frame)
 
         # generate control sum
         if self.control_method == 0:

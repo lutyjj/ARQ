@@ -12,7 +12,6 @@ class Sender:
     bitList = []
     packets = []
     shape = None
-    ts: TransmissionChannel
 
     def __init__(self, receiver, control_method, window_size, packet_size):
         self.control_method = control_method
@@ -88,7 +87,7 @@ class Sender:
 
     def send_frames(self, chosen_algorithm):
         # send original shape and control method
-        self.ts.init_connection(self.shape, self.control_method)
+        self.ts.init_connection(self.shape, self.control_method, len(self.packets))
 
         # Stop-and-wait ARQ
         if chosen_algorithm == 0:
