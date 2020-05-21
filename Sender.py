@@ -1,8 +1,41 @@
 import numpy as np
 import crcmod as crcmod
 import hashlib
-
 from TransmissionChannel import TransmissionChannel
+
+
+def parity_bit(frame, length):
+    frame_sum = 0
+    for i in range(0, length):
+        frame_sum += frame[i]
+
+    return frame_sum % 2
+
+
+def crc(array, length):
+    crc32_func = crcmod.mkCrcFun(0x104c11db7, initCrc=0, xorOut=0xFFFFFFFF)
+
+    # generate string of ints without last item (control sum)
+    line = ''
+    for i in range(0, length):
+        line += str(array[i])
+
+    # generate CRC based on string
+    crc_result = hex(crc32_func(bytes(line, encoding='utf-8')))
+
+    return crc_result
+
+
+def md5(array, length):
+    # generate string of ints without last item (control sum)
+    line = ''
+    for i in range(0, length):
+        line += str(array[i])
+
+    text_utf8 = line.encode("utf-8")
+    result_hash = hashlib.md5(text_utf8)
+
+    return result_hash.hexdigest()
 
 
 class Sender:
@@ -74,15 +107,15 @@ class Sender:
         # generate control sum for each packet
         if self.control_method == 0:
             for packet in self.packets:
-                bit = self.parity_bit(packet)
+                bit = parity_bit(packet, len(packet))
                 packet.append(bit)
         elif self.control_method == 1:
             for packet in self.packets:
-                bit = self.crc(packet)
+                bit = crc(packet, len(packet))
                 packet.append(bit)
         elif self.control_method == 2:
             for packet in self.packets:
-                bit = self.MD5(packet)
+                bit = md5(packet, len(packet))
                 packet.append(bit)
 
     def send_frames(self, chosen_algorithm):

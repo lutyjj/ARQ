@@ -1,8 +1,6 @@
 import numpy as np
 from PIL import Image
-import crcmod
-import hashlib
-from TransmissionChannel import TransmissionChannel
+from Sender import parity_bit, crc, md5
 
 
 class Receiver:
@@ -58,11 +56,11 @@ class Receiver:
 
         # generate control sum
         if self.control_method == 0:
-            control_sum = self.parity_bit(self.frame)
+            control_sum = parity_bit(self.frame, len(self.frame) - 1)
         elif self.control_method == 1:
-            control_sum = self.crc(self.frame)
+            control_sum = crc(self.frame, len(self.frame) - 1)
         elif self.control_method == 2:
-            control_sum = self.MD5(self.frame)
+            control_sum = md5(self.frame, len(self.frame) - 1)
 
         self.numberOfSentPackets += 1
         # check for control sum to be the same
