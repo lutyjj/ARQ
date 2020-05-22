@@ -6,37 +6,34 @@ class TransmissionChannel:
 
     def __init__(self, receiver):
         self.receiver = receiver
-
-    def init_connection(self, shape, control_method, packets_count):
+    
+    # Send all meta-data to receiver
+    def init_metadata(self, shape, control_method, packets_count):
         self.receiver.shape = shape
         self.receiver.init_result_list(packets_count)
         self.receiver.control_method = control_method
 
+    # Pass frame to receiver
     def pass_frame(self, frame, index):
         frame = self.bsc(frame)
+        
+        # Return ACK
         return self.receiver.receive_frame(frame, index)
 
-    def bsc_bit(self, bit, probability):
-        if self.draw(probability):
-            if bit == 0:
-                bit = 1
-            else:
-                bit = 0
-        return bit
-
+    # BSC - binary symmetric channel symulation
     def bsc(self, frame):
         noised = []
         for bit in frame:
-            noised.append(self.bsc_bit(bit, self.probability))
+            noised.append(self.flip_bit(bit, self.probability))
+
         return noised
 
-    def draw(self, probability):
-        seed = random.random()
-        if seed <= probability:
-            return True
-        else:
-            return False
+    # Flip bit with certain probability
+    def flip_bit(self, bit, probability):
+        if random.random() < probability:
+            bit = 1 if bit == 0 else 1
+            
+        return bit
 
-# def Gilbert
-
-#  def BER             #BIT ERROR RATE
+    # def Gilbert
+    # def BER             #BIT ERROR RATE

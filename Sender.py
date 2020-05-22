@@ -52,9 +52,6 @@ class Sender:
         self.packet_size = packet_size
         self.ts = TransmissionChannel(receiver)
 
-    def set_ts_interference(self, probability):
-        self.ts.probability = probability
-
     def data_to_binary(self, array):
         # store shape of original array
         self.shape = array.shape
@@ -89,9 +86,15 @@ class Sender:
                 bit = md5(packet, len(packet))
                 packet.append(bit)
 
+    # Set channel interference probability
+    def set_ts_interference(self, probability):
+        self.ts.probability = probability
+
+    # Start transmission
     def send_frames(self, chosen_algorithm):
         # send original shape and control method
-        self.ts.init_connection(self.shape, self.control_method, len(self.packets))
+        self.ts.init_metadata(
+            self.shape, self.control_method, len(self.packets))
 
         # Stop-and-wait ARQ
         if chosen_algorithm == 0:
