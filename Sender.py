@@ -185,3 +185,8 @@ class Sender:
                     i = window_start
                 pass
             pass
+
+    def ber(self):
+        ber = self.ts.ber(self.packet_size * len(self.packets))
+        return ber
+        

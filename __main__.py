@@ -38,6 +38,8 @@ print('Starting transmission:')
 sender.send_frames(chosen_algorithm)
 receiver.print_statistics()
 
+print(f'BER: {sender.ber()} %')
+
 final_img = receiver.finalize_img()
 scaled_final_img = final_img.resize((640, 640))
 scaled_final_img.show()
