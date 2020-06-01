@@ -17,13 +17,15 @@ def start_test(chosen_algorithm, control_method, probability, windows_size, pack
 
     sender.send_frames(chosen_algorithm)
     final_img = receiver.finalize_img()
+    
+    return receiver.numberOfAcceptedPackets, receiver.numberOfRejectedPackets, sender.ber()
 
-
+times_to_repeat = 20
 window_size = 4
 packet_size = 4
 probability = 0.01
-while (window_size <= 32):
-    while (packet_size <= 32):
+while (window_size <= 16):
+    while (packet_size <= 16):
         while (probability <= 0.5):
             for alg in range(3):
                 for control_method in range(3):
@@ -33,9 +35,24 @@ while (window_size <= 32):
                     print(f'Alg: {alg}')
                     print(f'Control method: {control_method}')
 
-                    start_test(alg, control_method, probability, window_size, packet_size)
+                    sum_accepted = 0
+                    sum_rejected = 0
+                    sum_ber = 0
 
-                    print("\n")
+                    for count in range(times_to_repeat):
+                        accepted, rejected, ber = start_test(alg, control_method, probability, window_size, packet_size)
+                        
+                        if (count == 0):
+                            sum_accepted = accepted
+                        sum_rejected += rejected
+                        sum_ber += ber
+
+                    sum_rejected = sum_rejected / times_to_repeat
+                    sum_ber = sum_ber / times_to_repeat
+
+                    print(f'Accepted: {sum_accepted}')
+                    print(f'Rejected: {sum_rejected}')
+                    print(f'Ber: {sum_ber} \n')
             probability *= 2
 
         packet_size *= 2
