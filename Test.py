@@ -3,6 +3,7 @@ from PIL import Image
 from Sender import Sender
 from Receiver import Receiver
 
+
 def start_test(chosen_algorithm, control_method, probability, windows_size, packet_size):
     img = Image.open("test.jpg")
 

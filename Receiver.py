@@ -4,17 +4,15 @@ from Sender import parity_bit, crc, md5
 
 
 class Receiver:
-    control_method = 0
-    broken_frames = []
-    result = []
-    frame = []
-    shape = None
-    numberOfRejectedPackets = 0
-    numberOfAcceptedPackets = 0
-    numberOfSentPackets = 0
-
     def __init__(self):
-        pass
+        self.control_method = 0
+        self.broken_frames = []
+        self.result = []
+        self.frame = []
+        self.shape = None
+        self.numberOfRejectedPackets = 0
+        self.numberOfAcceptedPackets = 0
+        self.numberOfSentPackets = 0
 
     def init_result_list(self, packets_count):
         for i in range(0, packets_count):

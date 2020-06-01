@@ -39,14 +39,10 @@ def md5(array, length):
 
 
 class Sender:
-    control_method = 0
-    window_size: int = 4
-    counter = 0
-    bit_list = []
-    packets = []
-    shape = None
-
     def __init__(self, receiver, control_method, window_size, packet_size):
+        self.bit_list = []
+        self.packets = []
+        self.shape = None
         self.control_method = control_method
         self.window_size = window_size
         self.packet_size = packet_size
