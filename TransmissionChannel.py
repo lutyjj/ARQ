@@ -39,7 +39,10 @@ class TransmissionChannel:
     def flip_bit(self, bit, probability):
         if random.random() < probability:
             self.errorCounter += 1
-            bit = 1 if bit == 0 else 1
+            if bit == 0:
+                bit = 1
+            else:
+                bit = 0
             
         return bit
 
