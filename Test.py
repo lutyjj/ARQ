@@ -3,6 +3,7 @@ from PIL import Image
 from Sender import Sender
 from Receiver import Receiver
 
+file = open("test_results.txt", "w")
 
 def start_test(chosen_algorithm, control_method, probability, windows_size, packet_size):
     img = Image.open("test.jpg")
@@ -29,11 +30,11 @@ while (window_size <= 16):
         while (probability <= 0.5):
             for alg in range(3):
                 for control_method in range(3):
-                    print(f'Window size: {window_size}')
-                    print(f'Packet size: {packet_size}')
-                    print(f'Probability: {probability}')
-                    print(f'Alg: {alg}')
-                    print(f'Control method: {control_method}')
+                    file.write(f'Window size: {window_size} \n')
+                    file.write(f'Packet size: {packet_size} \n')
+                    file.write(f'Probability: {probability} \n')
+                    file.write(f'Alg: {alg} \n')
+                    file.write(f'Control method: {control_method} \n')
 
                     sum_accepted = 0
                     sum_rejected = 0
@@ -50,9 +51,9 @@ while (window_size <= 16):
                     sum_rejected = sum_rejected / times_to_repeat
                     sum_ber = sum_ber / times_to_repeat
 
-                    print(f'Accepted: {sum_accepted}')
-                    print(f'Rejected: {sum_rejected}')
-                    print(f'Ber: {sum_ber} \n')
+                    file.write(f'Accepted: {sum_accepted} \n')
+                    file.write(f'Rejected: {sum_rejected} \n')
+                    file.write(f'Ber: {sum_ber} \n\n')
             probability *= 2
 
         packet_size *= 2
@@ -60,3 +61,5 @@ while (window_size <= 16):
     packet_size = 4
     probability = 0.01
     window_size *= 2
+
+file.close()
