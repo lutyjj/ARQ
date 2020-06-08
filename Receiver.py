@@ -35,7 +35,7 @@ class Receiver:
         # check for control sum to be the same
         # with one stored in frame as last item
         if control_sum == self.frame[len(self.frame) - 1]:
-            # print("Frame ", index, " is good, continuing")
+            print("Frame ", index, " is good, continuing")
             self.numberOfAcceptedPackets += 1
             # delete last item of frame if control sums match
             received_frame = np.delete(self.frame, len(self.frame) - 1)
@@ -43,7 +43,7 @@ class Receiver:
             self.result[index] = received_frame
             return True
         else:
-            # print("Frame ", index, " is broken, repeating transmission")
+            print("Frame ", index, " is broken, repeating transmission")
             self.numberOfRejectedPackets += 1
             # store index of broken frame
             self.broken_frames.append(index)

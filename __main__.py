@@ -15,6 +15,11 @@ print('1. CRC')
 print('2. MD-5')
 control_method = int(input())
 
+print('Choose discrete channel model:')
+print('0. Binary Symmetric Channel')
+print("1. Gilbert's Model")
+model = int(input())
+
 print('Enter interference probability (float, 0 < x < 1): ')
 probability = float(input())
 print('Enter window size: ')
@@ -28,7 +33,7 @@ scaled_img.show()
 
 receiver = Receiver()
 sender = Sender(receiver, control_method, windows_size, packet_size)
-sender.set_ts_interference(probability)
+sender.set_ts_interference(probability, model)
 
 img_array = np.asarray(img)
 sender.data_to_binary(img_array)

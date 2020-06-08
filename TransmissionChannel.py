@@ -2,9 +2,17 @@ import random
 
 
 class TransmissionChannel:
+    model = 0
     probability = 0.1
     errorCounter = 0
     totalErrors = 0
+    gilbertState = 0
+    noisePropS0 = 0.9
+    noisePropS1 = 0.9
+    P01 = 0.2
+    P00 = 1 - 0.2
+    P10 = 0.1
+    P11 = 1 - 0.1
 
     def __init__(self, receiver):
         self.receiver = receiver
@@ -17,7 +25,10 @@ class TransmissionChannel:
 
     # Pass frame to receiver
     def pass_frame(self, frame, index):
-        frame = self.bsc(frame)
+        if self.model == 0:
+            frame = self.bsc(frame)
+        if self.model == 1:
+            frame = self.addGilbertNoise(frame)
         ack = self.receiver.receive_frame(frame, index)
 
         if ack == True:
@@ -47,6 +58,30 @@ class TransmissionChannel:
         return bit
 
     # def Gilbert
-    # def BER             #BIT ERROR RATE
+    def addGilbertNoiseBit(self, bit):
+        if self.gilbertState == 0:       #losowanie stanu modelu Gilberta
+            if random.random() < self.P01:
+                self.gilbertState = 1
+        elif self.gilbertState == 1:
+            if random.random() < self.P10:
+                self.gilbertState = 0
+
+        if self.gilbertState == 0:                               #zamiana bitu na przeciwny z prawdopodobienstwem dla danego stanu modelu
+            bit = self.flip_bit(bit, self.noisePropS0)
+        elif self.gilbertState == 1:
+            bit = self.flip_bit(bit, self.noisePropS1)
+
+        #print("GILBERT:{}".format(self.__gilbertState))
+        return bit
+
+    def addGilbertNoise(self, packet):
+        noised = []
+        for bit in packet:
+            noised.append(self.addGilbertNoiseBit(bit))
+
+        return noised
+
+
+    # def BER        #BIT ERROR RATE
     def ber(self, bits_count):
         return (self.totalErrors / bits_count) * 100
