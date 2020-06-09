@@ -83,9 +83,11 @@ class Sender:
                 packet.append(bit)
 
     # Set channel interference probability
-    def set_ts_interference(self, probability, model):
+    def set_ts_interference(self, probability, model, P01, P10):
         self.ts.probability = probability
         self.ts.model = model
+        self.ts.P01 = P01
+        self.ts.P10 = P10
 
     # Start transmission
     def send_frames(self, chosen_algorithm):
