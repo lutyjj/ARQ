@@ -7,12 +7,12 @@ class TransmissionChannel:
     errorCounter = 0
     totalErrors = 0
     gilbertState = 0
-    noisePropS0 = 0.9
-    noisePropS1 = 0.9
-    P01 = 0.2
-    P00 = 1 - 0.2
-    P10 = 0.1
-    P11 = 1 - 0.1
+    noisePropS0 = 0.3
+    noisePropS1 = 0.3
+    P01 = 0.3
+    P00 = 1 - 0.3
+    P10 = 0.3
+    P11 = 1 - 0.3
 
     def __init__(self, receiver):
         self.receiver = receiver
@@ -59,22 +59,22 @@ class TransmissionChannel:
 
     # def Gilbert
     def addGilbertNoiseBit(self, bit):
-        if self.gilbertState == 0:       #losowanie stanu modelu Gilberta
+        if self.gilbertState == 0:          #losowanie stanu modelu Gilberta
             if random.random() < self.P01:
                 self.gilbertState = 1
         elif self.gilbertState == 1:
             if random.random() < self.P10:
                 self.gilbertState = 0
 
-        if self.gilbertState == 0:                               #zamiana bitu na przeciwny z prawdopodobienstwem dla danego stanu modelu
+        if self.gilbertState == 0:               #zamiana bitu na przeciwny z prawdopodobienstwem dla danego stanu modelu
             bit = self.flip_bit(bit, self.noisePropS0)
         elif self.gilbertState == 1:
             bit = self.flip_bit(bit, self.noisePropS1)
 
-        #print("GILBERT:{}".format(self.__gilbertState))
         return bit
 
     def addGilbertNoise(self, packet):
+        self.errorCounter = 0
         noised = []
         for bit in packet:
             noised.append(self.addGilbertNoiseBit(bit))
