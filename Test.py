@@ -23,15 +23,18 @@ def start_test(chosen_algorithm, control_method, probability, windows_size, pack
     return receiver.numberOfAcceptedPackets, receiver.numberOfRejectedPackets, sender.ber()
 
 
-times_to_repeat = 10
+times_to_repeat = 1
 window_size = 4
 packet_size = 4
 probability = 0.01
 P01 = 0.01
 P10 = 0.01
 while (window_size <= 16):
+    print('window size', window_size)
     while (packet_size <= 16):
+        print('packet size', packet_size)
         while (probability <= 0.5):
+            print('probability', probability)
             for alg in range(3):
                 for control_method in range(3):
                     model = 0
@@ -48,7 +51,7 @@ while (window_size <= 16):
 
                     for count in range(times_to_repeat):
                         accepted, rejected, ber = start_test(alg, control_method, probability, window_size, packet_size,
-                                                             model,0,0)
+                                                             model, 0, 0)
 
                         if (count == 0):
                             sum_accepted = accepted
@@ -78,7 +81,8 @@ while (window_size <= 16):
                         sum_ber = 0
 
                         for count in range(times_to_repeat):
-                            accepted, rejected, ber = start_test(alg, control_method, probability, window_size, packet_size,
+                            accepted, rejected, ber = start_test(alg, control_method, probability, window_size,
+                                                                 packet_size,
                                                                  model, P01, P10)
 
                             if (count == 0):
@@ -92,12 +96,15 @@ while (window_size <= 16):
                         file.write(f'Accepted: {sum_accepted} \n')
                         file.write(f'Rejected: {sum_rejected} \n')
                         file.write(f'Ber: {sum_ber} \n\n')
-                        P01 *= 2
+                        P01 *= 4
             probability *= 2
             P01 = 0.01
-            P10 *= 2
+            P10 *= 4
 
         packet_size *= 2
+        probability = 0.01
+        P01 = 0.01
+        P10 = 0.01
 
     packet_size = 4
     probability = 0.01

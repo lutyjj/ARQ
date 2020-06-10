@@ -57,11 +57,11 @@ class TransmissionChannel:
 
     # def Gilbert
     def addGilbertNoiseBit(self, bit):
-        if self.gilbertState == 0:          #losowanie stanu modelu Gilberta
-            if random.random() < self.probability:
+        if self.gilbertState == 0:
+            if random.random() < self.P01:
                 self.gilbertState = 1
         elif self.gilbertState == 1:
-            if random.random() < self.probability:
+            if random.random() < self.P10:
                 self.gilbertState = 0
 
         if self.gilbertState == 0:               #zamiana bitu na przeciwny z prawdopodobienstwem dla danego stanu modelu
