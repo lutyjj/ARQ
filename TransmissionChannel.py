@@ -6,10 +6,10 @@ class TransmissionChannel:
     probability = 0.1
     errorCounter = 0
     totalErrors = 0
-    gilbertState = 0
-    P01 = 0.3
+    gilbertState = 0   # 0 - succesfully received packet, 1 - lost packet
+    P01 = 0.3          # the probability of going from good state to bad
     P00 = 1 - P01
-    P10 = 0.3
+    P10 = 0.3           # the probability of going from bad state to good
     P11 = 1 - P10
 
     def __init__(self, receiver):
@@ -35,7 +35,7 @@ class TransmissionChannel:
         # Return ACK
         return ack
 
-    # BSC - binary symmetric channel symulation
+    # BSC - binary symmetric channel simulation
     def bsc(self, frame):
         noised = []
         self.errorCounter = 0
@@ -58,10 +58,10 @@ class TransmissionChannel:
     # def Gilbert
     def addGilbertNoiseBit(self, bit):
         if self.gilbertState == 0:
-            if random.random() < self.P01:
+            if random.random() < self.PZD:
                 self.gilbertState = 1
         elif self.gilbertState == 1:
-            if random.random() < self.P10:
+            if random.random() < self.PDZ:
                 self.gilbertState = 0
 
         if self.gilbertState == 0:               #zamiana bitu na przeciwny z prawdopodobienstwem dla danego stanu modelu
