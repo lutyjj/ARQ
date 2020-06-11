@@ -27,9 +27,9 @@ model = int(input())
 print('Enter interference probability (float, 0 < x < 1): ')
 probability = float(input())
 if model == 1:
-    print('Enter interference probability transition from 0 to 1 (float, 0 < x < 1): ')
+    print('Enter interference probability transition from good state to bad (float, 0 < x < 1): ')
     P01 = float(input())
-    print('Enter interference probability transition from 1 to 0  (float, 0 < x < 1): ')
+    print('Enter interference probability transition from bad state to good  (float, 0 < x < 1): ')
     P10 = float(input())
 else:
     P01 = 0
@@ -57,22 +57,6 @@ sender.split_array()
 print('Starting transmission:')
 sender.send_frames(chosen_algorithm)
 receiver.print_statistics()
-
-
-
-print(f'BER: {sender.ber()} %')
-
-error_counter = 0
-ber = 0
-for j in range(0, len(receiver.result)):
-    final_pack = receiver.result[j].astype(np.uint8)
-    start_pack = sender.packets[j]
-    for i in range(0, packet_size):
-        if start_pack[i] != final_pack[i]:
-            error_counter += 1
-    j += 1
-ber = error_counter/(len(receiver.result)*packet_size)*100
-print('BER: ', ber, '%')
 
 
 final_img = receiver.finalize_img()

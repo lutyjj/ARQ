@@ -31,6 +31,7 @@ def start_test(chosen_algorithm, control_method, probability, windows_size, pack
     final_img = receiver.finalize_img()
     return receiver.numberOfAcceptedPackets, receiver.numberOfRejectedPackets, ber
 
+<<<<<<< HEAD
 def run_test():
     file = open("test_results.txt", "w")
     times_to_repeat = 10
@@ -40,7 +41,20 @@ def run_test():
     P01 = 0.01
     P10 = 0.01
     while (window_size <= 16):
+=======
+times_to_repeat = 1
+window_size = 4
+packet_size = 4
+probability = 0.01
+P01 = 0.01
+P10 = 0.01
+while (window_size <= 16):
+    print('window size', window_size)
+    while (packet_size <= 16):
+        print('packet size', packet_size)
+>>>>>>> 5b2043337a6b2800ffd638a8633d7ad4826dabfc
         while (probability <= 0.5):
+            print('probability', probability)
             for alg in range(3):
                 for control_method in range(3):
                     model = 0
@@ -57,7 +71,11 @@ def run_test():
 
                     for count in range(times_to_repeat):
                         accepted, rejected, ber = start_test(alg, control_method, probability, window_size, packet_size,
+<<<<<<< HEAD
                                                                 model,0,0)
+=======
+                                                             model, 0, 0)
+>>>>>>> 5b2043337a6b2800ffd638a8633d7ad4826dabfc
 
                         if (count == 0):
                             sum_accepted = accepted
@@ -87,8 +105,14 @@ def run_test():
                         sum_ber = 0
 
                         for count in range(times_to_repeat):
+<<<<<<< HEAD
                             accepted, rejected, ber = start_test(alg, control_method, probability, window_size, packet_size,
                                                                     model, P01, P10)
+=======
+                            accepted, rejected, ber = start_test(alg, control_method, probability, window_size,
+                                                                 packet_size,
+                                                                 model, P01, P10)
+>>>>>>> 5b2043337a6b2800ffd638a8633d7ad4826dabfc
 
                             if (count == 0):
                                 sum_accepted = accepted
@@ -101,12 +125,24 @@ def run_test():
                         file.write(f'Accepted: {sum_accepted} \n')
                         file.write(f'Rejected: {sum_rejected} \n')
                         file.write(f'Ber: {sum_ber} \n\n')
+<<<<<<< HEAD
                         P01 *= 2
                 probability *= 2
                 P01 = 0.01
                 P10 *= 2
 
             packet_size *= 2
+=======
+                        P01 *= 4
+            probability *= 2
+            P01 = 0.01
+            P10 *= 4
+
+        packet_size *= 2
+        probability = 0.01
+        P01 = 0.01
+        P10 = 0.01
+>>>>>>> 5b2043337a6b2800ffd638a8633d7ad4826dabfc
 
         packet_size = 4
         probability = 0.01
